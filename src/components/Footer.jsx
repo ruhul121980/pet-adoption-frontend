@@ -15,7 +15,7 @@ function Footer() {
                     {i.subCats.map((j,index)=>(
                       <Link key={index + '200'} href={j.url} className='font-light hover:underline underline-offset-2 '>{j.name}</Link>
                     ))}
-                    {/* footer */}
+
                   </div>
                 </div>
               ))
