@@ -2,74 +2,78 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState ,useEffect} from 'react';
+ 
+function PetAdoptionSection() {
+  let findCategories = [
+    {
+      name:'All', 
+      url: '/adoption', 
+    },
+    {
+      name:'Dog', 
+      url: '/adoption', 
+    },
+    {
+      name:'Cat', 
+      url: '/adoption', 
+    },
+    {
+      name:'Rabbit', 
+      url: '/adoption', 
+    },
+    {
+      name:'Bird', 
+      url: '/adoption', 
+    },
+    {
+      name:'Others', 
+      url: '/adoption', 
+    },
+  ]
+  const [sort,setSort] = useState('All'); 
+  
+  const [adoptionPosts, setAdoptionPosts] = useState([]); // Empty array to store posts
+  const [isLoading, setIsLoading] = useState(false); // State for loading indicator
 
-export default  function  adoption () {
-    let findCategories = [
-        {
-          name:'All', 
-          url: '/adoption', 
-        },
-        {
-          name:'Dog', 
-          url: '/adoption', 
-        },
-        {
-          name:'Cat', 
-          url: '/adoption', 
-        },
-        {
-          name:'Rabbit', 
-          url: '/adoption', 
-        },
-        {
-          name:'Bird', 
-          url: '/adoption', 
-        },
-        {
-          name:'Others', 
-          url: '/adoption', 
-        },
-      ]
-    const [sort,setSort] = useState('All'); 
-    const [adoptionPosts, setAdoptionPosts] = useState([]); // Empty array to store posts
-    const [isLoading, setIsLoading] = useState(false); // State for loading indicator
-
-    // Function to fetch adoption posts
-    const fetchAdoptionPosts = async () => {  
-        try {
-        const headers = new Headers({
-            'Content-Type': 'application/json',
-        //    'Access-Control-Request-Method': 'GET'
-            });
-    
-        // Send the GET request
-        const response = await fetch('http://localhost:4000/api/all-adoptions', {
-        method: 'Get',
-        headers, 
+  // Function to fetch adoption posts
+  const fetchAdoptionPosts = async () => {  
+    try {
+      const headers = new Headers({
+        'Content-Type': 'application/json',
+     //    'Access-Control-Request-Method': 'GET'
         });
-        if (!response.ok) {
-            throw new Error(`All Adoptions API request failed with status ${response.status}`);
-        }
+ 
+     // Send the GET request
+     const response = await fetch('http://localhost:4000/api/all-adoptions', {
+       method: 'Get',
+       headers, 
+     });
+      if (!response.ok) {
+        throw new Error(`All Adoptions API request failed with status ${response.status}`);
+      }
 
-        const result = await response.json();
-        // console.log(result)
-        if(result.status == 200){
-            const data = result.data
-            setAdoptionPosts(data); // Update state with fetched posts
-        }
-        } catch (err) {
-        console.error('Error fetching posts:', err);
-        } 
-    };
-    // console.log( "Find from api",adoptionPosts)
-    useEffect(() => {
-        fetchAdoptionPosts();
-    }, []);
-    
-    return  (
-    <main  className="min-h-screen  ">
+      const result = await response.json();
+      // console.log(result)
+      if(result.status == 200){
+        const data = result.data
+        setAdoptionPosts(data); // Update state with fetched posts
+      }
+    } catch (err) {
+      console.error('Error fetching posts:', err);
+    } 
+  };
+  // console.log( "Find from api",adoptionPosts)
+  let homeAdoptionPosts = adoptionPosts.slice(0,4)
+  // Fetch posts on component mount
+  useEffect(() => {
+    fetchAdoptionPosts();
+  }, []);
+  
+
+  return (
+    <>
       <section className='flex flex-col items-center justify-center'>
-        <h2 className='font-semibold  text-center p-5 text-3xl md:text-4xl lg:text-5xl'>Find Adoptions</h2>
+        <h2 className='font-semibold  text-center p-5 text-3xl md:text-4xl lg:text-5xl'>Pet Adoption</h2>
         <div className='w-full   lg:w-[85%] px-5 flex flex-col md:flex-row gap-5  items-end md:items-center justify-between'>
           <div className='flex justify-start w-full md:w-auto  items-center gap-2 text-xs md:text-sm '>
             {
@@ -83,20 +87,30 @@ export default  function  adoption () {
               ))
             }
           </div>
-          
+          <Link href={'/adoption'} className='flex items-center gap-1 text-custom-violet hover:text-custom-violet-light text-xs md:text-sm'>
+            <span>
+              See All
+            </span>
+            <span className='text-xl md:text-2xl lg:text-3xl'>
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+              <path fill="currentColor" d="m23.068 11.993l-4.25-4.236l-1.412 1.417l1.835 1.83L.932 11v2l18.305.002l-1.821 1.828l1.416 1.412z"> 
+              </path>
+            </svg>
+            </span>
+          </Link>
         </div>
         <div className='w-full  lg:w-[85%] p-5 grid grid-cols-1 md:grid-cols-4 gap-5 md:gap-2 lg:gap-5' >
             {
-              adoptionPosts.map((i,index)=>(
+              homeAdoptionPosts.map((i,index)=>(
                 <Link key={i.petNickname+index} href={i.url || '/'} className=' rounded-lg overflow-hidden text-xs shadow-md hover:shadow-lg duration-100'>
                   <div className='relative z-[-100] '>
-                    <img className='w-full z-0' src={i.img} alt={i.petNickname} />
+                    <img className='w-full z-0' src={i.img} alt={i.name} />
                     <div className=' absolute top-0 left-0 right-0 w-full bg-black/40 flex justify-between items-center p-2 text-xs text-white'>
                       <p>{i.category}</p>
                       <p>{i.postDate}</p>
                     </div>
                     <div className=' absolute bottom-0 left-0 right-0 w-full bg-custom-violet/80 flex justify-between items-center p-2 text-xs text-white'>
-                      <p className='text-sm'>{i.petNickname}</p>
+                      <p className='text-sm'>{i.name}</p>
                     </div>
                   </div>
                   <div className='p-2'>
@@ -140,7 +154,7 @@ export default  function  adoption () {
             <h3 className='font-extrabold text-3xl md:text-4xl text-center lg:text-5xl text-custom-violet'>Find Your Furry Friend</h3>
             <p className='  text-center md:text-start  w-[80%] font-light text-secondary-color'>Embrace the joy of giving a deserving animal a second chance at happiness by opening your heart and home to a furry friend in need, creating a lifelong bond that enriches both your lives</p>
             <div>
-              <Link href={'/login'} className='px-5 py-2 bg-custom-violet text-white rounded shadow hover:bg-custom-violet/90'>Start Pet Adoption</Link>
+              <Link href={'/adoption'} className='px-5 py-2 bg-custom-violet text-white rounded shadow hover:bg-custom-violet/90'>Start Pet Adoption</Link>
             </div>
           </div>
           <Image 
@@ -152,14 +166,8 @@ export default  function  adoption () {
           />
         </section>
       </div>
-    </main>
-    )
-  };
+    </>
+  );
+}
 
-export default  function  adoption () {
-    return  (
-    <main  className="min-h-screen">
-        All pet animals adoption
-    </main>
-    )
-  };
+export default PetAdoptionSection;
