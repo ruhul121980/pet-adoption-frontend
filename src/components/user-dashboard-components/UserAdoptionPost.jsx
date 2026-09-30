@@ -1,5 +1,6 @@
 import React from 'react'
 import { useUserContext } from '../context/UserContext' 
+<<<<<<< HEAD
 
 const UserAdoptionPost = () => {
   const userContext = useUserContext()
@@ -8,6 +9,48 @@ const UserAdoptionPost = () => {
     <div>
       {
         posts.length < 1 ?
+=======
+import { handleAdoptPost } from '@/utils/handleAdoptPost'
+import { setUserData } from '@/utils/handleUserData'
+import { removeItemFromArray } from '@/utils/removeItemFromArr'
+
+const UserAdoptionPost = ({setShowOnDashboard}) => {
+  const userContext = useUserContext()
+  
+  //to mark as adopt
+  const handleMarkAsAdopted = async(post,index)=>{
+    const {email,_id,password,type,posts} = userContext.user 
+    post.adopted = true
+    posts[index] = post
+    const updateUserData = { email,_id,password,type,posts}
+    const serverResponse = await handleAdoptPost(updateUserData)
+    
+    if(serverResponse.status ==200){
+      setUserData({...userContext.user, ...serverResponse.data})
+      userContext.setUser({...userContext.user, ...serverResponse.data})
+    }
+    setShowOnDashboard('myAdoptionPost')
+  }
+  
+  //to delete post
+  const handleDeletePost  = async (index)=>{
+    const {email,_id,password,type,posts} = userContext.user 
+    const newPosts = removeItemFromArray(posts,index)
+    console.log("new posts", newPosts)
+    const updateUserData = { email,_id,password,type,posts:newPosts}
+    const serverResponse = await handleAdoptPost(updateUserData)
+    
+    if(serverResponse.status ==200){
+      setUserData({...userContext.user, ...serverResponse.data})
+      userContext.setUser({...userContext.user, ...serverResponse.data})
+    }
+    setShowOnDashboard('myAdoptionPost')
+  }
+  return (
+    <div>
+      {
+        userContext.user.posts.length < 1 ?
+>>>>>>> 70a242a0161f8339dfbcd9be9e85327ea488bd68
         <div>
           <p className='text-red-500 bg-red-500/10 py-3 w-full px-2 font-semibold text-lg'>No Post to see !!</p>
         </div>
@@ -19,8 +62,14 @@ const UserAdoptionPost = () => {
           
           <div className=' grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 p-5'>
           {
+<<<<<<< HEAD
             posts.map((i,index)=>  
                  <div className=' rounded-lg overflow-hidden text-xs shadow-md hover:shadow-lg duration-100'>
+=======
+            userContext.user.posts.map((i,index)=>  
+                 <div key={i.petNickname+index} className=' rounded-lg overflow-hidden text-xs shadow-md hover:shadow-lg duration-100 flex flex-col justify-between'>
+                  <div>
+>>>>>>> 70a242a0161f8339dfbcd9be9e85327ea488bd68
                     <div className='relative z-[-100] '>
                       <img className='w-full z-0' src={i.img} alt={i.petNickname} />
                       <div className=' absolute top-0 left-0 right-0 w-full bg-black/40 flex justify-between items-center p-2 text-xs text-white'>
@@ -61,9 +110,30 @@ const UserAdoptionPost = () => {
                         </p>
                       </div>
                     </div>
+<<<<<<< HEAD
                     <div className='grid grid-cols-2 text-white'>
                       <button className='p-3 font-semibold hover:bg-green-500/50 hover:text-black bg-green-500 duration-200'>Mark as Adopted</button>
                       <button className='p-3 font-semibold hover:bg-red-500/50 hover:text-black bg-red-500  duration-200'>Delete Post</button>
+=======
+                    <div className='p-2 py-0 pb-2'>
+                      <p className='flex gap-1'>
+                          <span className=' font-semibold'>Adopted:</span>
+                          <span>
+                            {i.adopted?"Yes":'No'}
+                          </span>
+                      </p>
+                    </div>
+
+                  </div>
+                    <div className='grid grid-cols-2 text-white '>
+                      <button disabled={i.adopted} onClick={()=>handleMarkAsAdopted(i,index)} 
+                      className={`p-2 font-semibold ${i.adopted?'' : 'hover:bg-green-500/50 hover:text-black'} bg-green-500 duration-200`}>
+                        {i.adopted?"Adopted":' Mark as Adopted'}
+                      </button>
+                      <button
+                      onClick={()=>handleDeletePost(index)}
+                      className='p-3 font-semibold hover:bg-red-500/50 hover:text-black bg-red-500  duration-200'>Delete Post</button>
+>>>>>>> 70a242a0161f8339dfbcd9be9e85327ea488bd68
                     </div>
                  </div> 
             )

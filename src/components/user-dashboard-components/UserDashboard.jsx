@@ -9,7 +9,11 @@ import VetAllServices from './VetAllServices'
 import VetCreateService from './VetCreateService'
 
 const UserDashboard = ({showOnDashboard,setShowOnDashboard}) => {
+<<<<<<< HEAD
      
+=======
+ 
+>>>>>>> 70a242a0161f8339dfbcd9be9e85327ea488bd68
   return (
     <div>
         {
@@ -18,7 +22,11 @@ const UserDashboard = ({showOnDashboard,setShowOnDashboard}) => {
         }
         {
             showOnDashboard == 'myAdoptionPost' &&
+<<<<<<< HEAD
             <UserAdoptionPost/>
+=======
+            <UserAdoptionPost setShowOnDashboard={setShowOnDashboard}/>
+>>>>>>> 70a242a0161f8339dfbcd9be9e85327ea488bd68
         }
         {
             showOnDashboard == 'myCart' &&
