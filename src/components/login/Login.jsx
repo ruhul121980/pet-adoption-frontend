@@ -35,7 +35,7 @@ const Login = () => {
   
     const handleSubmit = async (event) => {
      // event.preventDefault(); // Prevent default form submission behavior
-     console.log("login clicked") 
+    //  console.log("login clicked") 
      if(email.length > 2 | password.length >2 ){
         let loginObj = {
           email,
@@ -51,10 +51,10 @@ const Login = () => {
         // console.log(loginObj)
         //fetching data from server
         const loginServerData = await handleLoginFunction(loginObj)
-        console.log("get the login data",loginServerData)
+        // console.log("get the login data",loginServerData)
         if (loginServerData.status == 200) {
           setErrorMessage('');
-          let userData = {...loginServerData.data , login:true}
+          let userData = {...loginServerData.data , login:true,pwd:''}
           //set item to localstorage 
           setUserData(userData)
           userContext.setUser(userData)

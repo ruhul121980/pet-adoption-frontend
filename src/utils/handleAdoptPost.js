@@ -13,18 +13,14 @@ export const  handleAdoptPost = async (userData)=>{
         method: 'POST',
         headers,
         body,
-      });
-      console.log("response is ", response)
-       
-  
+      }); 
       // Parse the response data 
       const data = await response.json();
-      console.log('Post response:', data);
+      console.log('response:', data);
       console.log('status:', data?.status);
   
       return data; // return the response data
     } catch (error) {
       console.error(' error:', error.message);
-    //   return Promise.reject(error); // Return a rejected promise for error handling
     }
 }

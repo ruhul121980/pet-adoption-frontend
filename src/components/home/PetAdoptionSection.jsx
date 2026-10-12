@@ -1,14 +1,7 @@
 'use client'
-<<<<<<< HEAD
-import { petAdoptionData } from '@/constants/petAdoptionData';
-import Image from 'next/image';
-import Link from 'next/link';
-import React, { useState } from 'react';
-=======
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState ,useEffect} from 'react';
->>>>>>> 70a242a0161f8339dfbcd9be9e85327ea488bd68
  
 function PetAdoptionSection() {
   let findCategories = [
@@ -38,48 +31,37 @@ function PetAdoptionSection() {
     },
   ]
   const [sort,setSort] = useState('All'); 
-<<<<<<< HEAD
-=======
   
-  const [adoptionPosts, setAdoptionPosts] = useState([]); // Empty array to store posts
-  const [isLoading, setIsLoading] = useState(false); // State for loading indicator
+  const [adoptionPosts, setAdoptionPosts] = useState([]);
 
   // Function to fetch adoption posts
   const fetchAdoptionPosts = async () => {  
     try {
       const headers = new Headers({
         'Content-Type': 'application/json',
-     //    'Access-Control-Request-Method': 'GET'
         });
- 
-     // Send the GET request
-     const response = await fetch('http://localhost:4000/api/all-adoptions', {
-       method: 'Get',
-       headers, 
-     });
+      const response = await fetch('http://localhost:4000/api/all-adoptions', {
+        method: 'Get',
+        headers, 
+      });
       if (!response.ok) {
         throw new Error(`All Adoptions API request failed with status ${response.status}`);
       }
-
       const result = await response.json();
-      // console.log(result)
       if(result.status == 200){
         const data = result.data
-        setAdoptionPosts(data); // Update state with fetched posts
+        setAdoptionPosts(data); 
       }
     } catch (err) {
       console.error('Error fetching posts:', err);
     } 
   };
-  // console.log( "Find from api",adoptionPosts)
   let homeAdoptionPosts = adoptionPosts.slice(0,4)
-  // Fetch posts on component mount
   useEffect(() => {
     fetchAdoptionPosts();
   }, []);
   
 
->>>>>>> 70a242a0161f8339dfbcd9be9e85327ea488bd68
   return (
     <>
       <section className='flex flex-col items-center justify-center'>
@@ -111,13 +93,8 @@ function PetAdoptionSection() {
         </div>
         <div className='w-full  lg:w-[85%] p-5 grid grid-cols-1 md:grid-cols-4 gap-5 md:gap-2 lg:gap-5' >
             {
-<<<<<<< HEAD
-              petAdoptionData.map((i,index)=>(
-                <Link key={i.name+index} href={i.url} className=' rounded-lg overflow-hidden text-xs shadow-md hover:shadow-lg duration-100'>
-=======
               homeAdoptionPosts.map((i,index)=>(
                 <Link key={i.petNickname+index} href={i.url || '/'} className=' rounded-lg overflow-hidden text-xs shadow-md hover:shadow-lg duration-100'>
->>>>>>> 70a242a0161f8339dfbcd9be9e85327ea488bd68
                   <div className='relative z-[-100] '>
                     <img className='w-full z-0' src={i.img} alt={i.name} />
                     <div className=' absolute top-0 left-0 right-0 w-full bg-black/40 flex justify-between items-center p-2 text-xs text-white'>

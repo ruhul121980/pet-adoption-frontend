@@ -9,7 +9,8 @@ import { setUserData } from '@/utils/handleUserData';
 
 const UserCreatePost = ({setShowOnDashboard}) => {
   const userContext = useUserContext();
-  
+  const {user } = userContext
+
   const [formData, setFormData] = useState({
     banned:false,
     adopted:false,
@@ -20,27 +21,15 @@ const UserCreatePost = ({setShowOnDashboard}) => {
     size: 'regular',
     vaccinated: 'no',
     spayed: 'no',
-<<<<<<< HEAD
-    category: '',
-    img: ' http://localhost:4000/uploads/889c4f84-8eee-48f3-a257-9f872ce5a390.png',
-=======
     category: 'Dog',
     img: './pet-adoption/dog.png',
->>>>>>> 70a242a0161f8339dfbcd9be9e85327ea488bd68
     images: [],
-    postDate: getFormattedDate()
+    postDate: getFormattedDate(),
+    phone: user.phoneNumber ,
+    email: user.email
   });
 
   const [selectedImages, setSelectedImages] = useState([]);
-<<<<<<< HEAD
-
-  const handleChange =  (event) => {
-    const { name, value, type } = event.target;
-    console.log(name, " type is ", type)
-    if (type === 'file') {
-      
-      const files = [...event.target.files]; // Get all selected files
-=======
   const [errorImages, setErrorImages] = useState('');
 
   const handleChange =  (event) => {
@@ -49,7 +38,6 @@ const UserCreatePost = ({setShowOnDashboard}) => {
     if (type === 'file') {
     setErrorImages('')
     const files = [...event.target.files]; // Get all selected files
->>>>>>> 70a242a0161f8339dfbcd9be9e85327ea488bd68
 
     const validImages = files.filter((file) => {
       const fileType = file.type;
@@ -85,13 +73,10 @@ const UserCreatePost = ({setShowOnDashboard}) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-<<<<<<< HEAD
-=======
     if( selectedImages.length == 0){
       setErrorImages("No Image Uploaded !")
       return;
     }
->>>>>>> 70a242a0161f8339dfbcd9be9e85327ea488bd68
     const images = selectedImages
     // console.log("got Images ", images) 
     const imgURLs = await uploadImages(images)
@@ -123,15 +108,12 @@ const UserCreatePost = ({setShowOnDashboard}) => {
       size: 'regular',
       vaccinated: 'no',
       spayed: 'no',
-<<<<<<< HEAD
-      category: '',
-      img: ' http://localhost:4000/uploads/889c4f84-8eee-48f3-a257-9f872ce5a390.png',
-=======
       category: 'Dog',
       img: './pet-adoption/dog.png',
->>>>>>> 70a242a0161f8339dfbcd9be9e85327ea488bd68
       images: [],
-      postDate: getFormattedDate()
+      postDate: getFormattedDate(),
+      phone: user.phoneNumber ,
+      email: user.email
     }); 
     setSelectedImages([]);
   };
@@ -154,25 +136,7 @@ const UserCreatePost = ({setShowOnDashboard}) => {
             placeholder='Pet Nickname'
           />
         </div>
-        <div className="w-full flex flex-col gap-2 md:w-2/3  p-2">
-<<<<<<< HEAD
-          <label htmlFor="category" className='font-semibold'>Category:</label>
-=======
-          {/* <label htmlFor="category" className='font-semibold'>Category:</label>
->>>>>>> 70a242a0161f8339dfbcd9be9e85327ea488bd68
-          <input
-            type="text"
-            id="category"
-            name="category"
-            value={formData.category}
-            onChange={handleChange}
-            required
-            className='p-2 bg-gray-500/10 '
-            placeholder='St no, post code, Address'
-<<<<<<< HEAD
-          />
-=======
-          /> */}
+        <div className="w-full flex flex-col gap-2 md:w-2/3  p-2"> 
           <label htmlFor="category" className='font-semibold'>Category:</label>
           <select 
           id="category" 
@@ -187,9 +151,9 @@ const UserCreatePost = ({setShowOnDashboard}) => {
             <option value="Cat">Cat</option>
             <option value="Bird">Bird</option>
             <option value="Fish">Fish</option>
+            <option value="Rabbit">Rabbit</option>
             <option value="Other">Other</option>
           </select>
->>>>>>> 70a242a0161f8339dfbcd9be9e85327ea488bd68
         </div>
         <div className="w-full flex flex-col gap-2 md:w-2/3  p-2">
           <label htmlFor="location" className='font-semibold'>Location:</label>
@@ -354,11 +318,7 @@ const UserCreatePost = ({setShowOnDashboard}) => {
         </div> 
     </div> 
         </div>
-<<<<<<< HEAD
-        
-=======
         {errorImages && <p className='text-xs font-semibold text-red-500'>{errorImages}</p>}
->>>>>>> 70a242a0161f8339dfbcd9be9e85327ea488bd68
         <button type="submit" 
         className='bg-blue-500/80 hover:bg-blue-500 text-white px-5 py-2 rounded-lg w-full md:w-2/3 font-bold duration-200'>Post Adoption</button>
       </form>

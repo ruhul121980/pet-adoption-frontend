@@ -15,17 +15,13 @@ export async function handleRegisterFunction(userData) {
         headers,
         body,
       });
-      console.log("response is ", response)
-  
+      
       // Parse the response data 
       const data = await response.json();
-      console.log('Registration response:', data);
-      console.log('Registration status:', data?.status);
   
       return data; // return the response data
     } catch (error) {
       console.error('Registration error:', error.message);
-    //   return Promise.reject(error); // Return a rejected promise for error handling
     }
   }
   

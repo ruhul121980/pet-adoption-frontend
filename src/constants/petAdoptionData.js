@@ -1,7 +1,7 @@
 export const petAdoptionData = [
     {
         name:'Jacky',
-        postDate: 'April 9, 2024',
+        postDate: 'September 9, 2026',
         category: 'Dog',
         location: ' Savar,Dhaka-1340',
         size: 'Regular',
@@ -14,7 +14,7 @@ export const petAdoptionData = [
     },
     {
         name:'Pinky',
-        postDate: 'April 9, 2024',
+        postDate: 'September 9, 2026',
         category: 'Rabbit',
         location: ' Savar,Dhaka-1340',
         size: 'Regular',
@@ -27,7 +27,7 @@ export const petAdoptionData = [
     },
     {
         name:'Max',
-        postDate: 'April 9, 2024',
+        postDate: 'September 9, 2026',
         category: 'Bird',
         location: ' Savar,Dhaka-1340',
         size: 'Regular',
@@ -40,7 +40,7 @@ export const petAdoptionData = [
     },
     {
         name:'Jacky',
-        postDate: 'April 9, 2024',
+        postDate: 'September 9, 2026',
         category: 'Dog',
         location: ' Savar,Dhaka-1340',
         size: 'Regular',

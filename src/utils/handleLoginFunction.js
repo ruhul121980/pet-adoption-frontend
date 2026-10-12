@@ -15,18 +15,12 @@ export async function handleLoginFunction(userData) {
         headers,
         body,
       });
-      console.log("response is ", response)
       
-  
-      // Parse the response data 
       const data = await response.json();
-    //   console.log('login response:', data);
-      console.log('login status:', data?.status);
   
-      return data; // return the response data
+      return data;
     } catch (error) {
       console.error('login error:', error.message);
-    //   return Promise.reject(error); // Return a rejected promise for error handling
     }
   }
   

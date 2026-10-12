@@ -6,10 +6,7 @@ import { isValidEmail } from '@/utils/emailValidChecker';
 import { handleRegisterFunction } from '@/utils/handleRegisterFunction';
 import { setUserData } from '@/utils/handleUserData';
 import { useUserContext } from '../context/UserContext';
-<<<<<<< HEAD
-=======
 import { checkPasswordStrength } from '@/utils/passwordStrength';
->>>>>>> 70a242a0161f8339dfbcd9be9e85327ea488bd68
 
 const Register = () => {
   const router = useRouter();
@@ -27,13 +24,10 @@ const Register = () => {
     const [errorEmail, setErrorEmail] = useState('');
     const [errorLicense, setErrorLicense] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-<<<<<<< HEAD
-=======
     const [errorPhone, setErrorPhone] = useState('');
     const [errorPassword, setErrorPassword] = useState('');
 
     const [passwordStrength, setPasswordStrength] = useState('')
->>>>>>> 70a242a0161f8339dfbcd9be9e85327ea488bd68
     
     const [showPassword, setShowPassword] = useState(false);
     const [registerType, setRegisterType] = useState('user') // user / veterinarian
@@ -57,38 +51,29 @@ const Register = () => {
         }
       } 
       else if (name === 'phoneNumber') {
-<<<<<<< HEAD
-=======
         
         if(value.length != 11 ){
           setErrorPhone("Enter 11 Digit Phone Number")
         }else{
           setErrorPhone('')
         }
->>>>>>> 70a242a0161f8339dfbcd9be9e85327ea488bd68
         setPhoneNumber(value);
       } 
       else if (name === 'address') {
         setAddress(value);
       } 
       else if (name === 'license') {
-<<<<<<< HEAD
-=======
         if(value.length < 6 ){
           setErrorLicense("License Must have 6 Character")
         }else{
           setErrorLicense('')
         }
->>>>>>> 70a242a0161f8339dfbcd9be9e85327ea488bd68
         setLicense(value);
       } 
       else if (name === 'password') {
         setPassword(value);
-<<<<<<< HEAD
-=======
         setPasswordStrength(checkPasswordStrength(password))
         
->>>>>>> 70a242a0161f8339dfbcd9be9e85327ea488bd68
       } else if (name === 'confirmPassword') {
         setConfirmPassword(value);
       }
@@ -96,14 +81,10 @@ const Register = () => {
   
     const handleSubmit = async (event) => {
       event.preventDefault(); // Prevent default form submission behavior
-<<<<<<< HEAD
-  
-=======
       if(password.length < 6){
         setErrorPassword('Password is Weak')
         return;
       }
->>>>>>> 70a242a0161f8339dfbcd9be9e85327ea488bd68
       if (password !== confirmPassword) {
         setErrorMessage('Passwords do not match!');
         return; // Prevent further processing if passwords don't match
@@ -112,8 +93,6 @@ const Register = () => {
         setErrorLicense('Give Valid License ')
         return ;
       }
-<<<<<<< HEAD
-=======
       if(phoneNumber.length != 11){
         setErrorPhone("Invalid Mobile Number")
         return;
@@ -122,14 +101,15 @@ const Register = () => {
         setErrorLicense("Invalid License Number")
         return;
       }
->>>>>>> 70a242a0161f8339dfbcd9be9e85327ea488bd68
       let registerObj = {
         firstName,
         lastName,
         email,
         password,
         phoneNumber,
-        address
+        address,
+        cart: [],
+        order: [],
       }
       if (registerType == 'user') {
         registerObj.type = 'user'
@@ -164,11 +144,7 @@ const Register = () => {
         </div>
         <div  >
             <h2 className='font-semibold  p-5 pb-0  text-3xl md:text-4xl lg:text-5xl'>Register</h2>
-<<<<<<< HEAD
-            <div className="w-full lg:w-2/3 p-5 flex flex-col gap-1"> 
-=======
             <form onSubmit={handleSubmit} className="w-full lg:w-2/3 p-5 flex flex-col gap-1"> 
->>>>>>> 70a242a0161f8339dfbcd9be9e85327ea488bd68
                 <div className="grid grid-cols-2 gap-1 border bg-custom-violet-light/10 p-1 rounded">
                      <button 
                      onClick={()=>{setRegisterType('user');setErrorLicense('')}} 
@@ -187,10 +163,7 @@ const Register = () => {
                     placeholder='First Name'
                     onChange={handleChange}
                     className=' border-2 border-custom-violet rounded p-3'
-<<<<<<< HEAD
-=======
                     required
->>>>>>> 70a242a0161f8339dfbcd9be9e85327ea488bd68
                     />
                 </div>
                 <div className="input-field flex flex-col gap-1">
@@ -203,10 +176,7 @@ const Register = () => {
                     placeholder='Last Name'
                     onChange={handleChange}
                     className=' border-2 border-custom-violet rounded p-3'
-<<<<<<< HEAD
-=======
                     required
->>>>>>> 70a242a0161f8339dfbcd9be9e85327ea488bd68
                     />
                 </div>
                 <div className="input-field flex flex-col gap-1">
@@ -219,10 +189,7 @@ const Register = () => {
                     placeholder='St 04, Post Code , Country'
                     onChange={handleChange}
                     className=' border-2 border-custom-violet rounded p-3'
-<<<<<<< HEAD
-=======
                     
->>>>>>> 70a242a0161f8339dfbcd9be9e85327ea488bd68
                     />
                 </div>
                 <div className="input-field flex flex-col gap-1">
@@ -235,15 +202,10 @@ const Register = () => {
                     placeholder='01*********'
                     onChange={handleChange}
                     className=' border-2 border-custom-violet rounded p-3'
-<<<<<<< HEAD
-                    />
-                </div>
-=======
                     required
                     />
                 </div>
                 {errorPhone && <p className="text-red-500 text-xs py-2">{errorPhone}</p>}
->>>>>>> 70a242a0161f8339dfbcd9be9e85327ea488bd68
                 {
                   registerType == 'veterinarian' &&
                   <div className="input-field flex flex-col gap-1">
@@ -256,10 +218,7 @@ const Register = () => {
                       placeholder='s1df**********'
                       onChange={handleChange}
                       className=' border-2 border-custom-violet rounded p-3'
-<<<<<<< HEAD
-=======
 
->>>>>>> 70a242a0161f8339dfbcd9be9e85327ea488bd68
                       />
                   </div>
                   
@@ -289,10 +248,7 @@ const Register = () => {
                     onChange={handleChange}
                     className=' border-2 border-custom-violet rounded p-3'
                     />
-<<<<<<< HEAD
-=======
                     {passwordStrength && <p className="text-purple-500 text-xs py-2">{passwordStrength}</p>}
->>>>>>> 70a242a0161f8339dfbcd9be9e85327ea488bd68
                     <label htmlFor="confirmPassword" className='font-semibold text-lg text-black/50'>Confirm Password:</label>
                     <input
                     type={showPassword ? 'text' : 'password'}
@@ -303,10 +259,7 @@ const Register = () => {
                     onChange={handleChange}
                     className=' border-2 border-custom-violet rounded p-3'
                     />
-<<<<<<< HEAD
-=======
                     {errorPassword && <p className="text-red-500 text-xs py-2">{errorPassword}</p>}
->>>>>>> 70a242a0161f8339dfbcd9be9e85327ea488bd68
                     <button type="button" className='text-xs text-start flex gap-2 items-center py-2' onClick={toggleShowPassword}>
                         <span className='text-base'>
                             {showPassword ? 
@@ -325,17 +278,10 @@ const Register = () => {
                     </button>
                 </div>
                 <button 
-<<<<<<< HEAD
-                onClick={handleSubmit} 
-                className=' px-8 py-3 bg-custom-violet-light/90 hover:bg-custom-violet-light duration-200 rounded-lg w-full font-bold text-white'
-                >Register</button>
-                {errorMessage && <p className="text-red-500 text-xs py-2">{errorMessage}</p>}
-=======
                 
                 className=' px-8 py-3 bg-custom-violet-light/90 hover:bg-custom-violet-light duration-200 rounded-lg w-full font-bold text-white'
                 >Register</button>
                 {errorMessage && <p key={'errormessage'} className="text-red-500 text-xs py-2">{errorMessage}</p>}
->>>>>>> 70a242a0161f8339dfbcd9be9e85327ea488bd68
                 <p className='font-light text-sm py-3'>
                     Already Have An Account? 
                     <span>
@@ -347,11 +293,7 @@ const Register = () => {
                         </Link>
                     </span>
                 </p>
-<<<<<<< HEAD
-            </div>
-=======
             </form>
->>>>>>> 70a242a0161f8339dfbcd9be9e85327ea488bd68
         </div>
         
     </div>
